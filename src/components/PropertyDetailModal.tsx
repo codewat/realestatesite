@@ -7,19 +7,15 @@ import {
   Bath,
   Maximize2,
   Car,
-  Calendar,
   MapPin,
   Check,
   ShieldCheck,
   Sparkles,
   Calculator,
-  Heart,
   Share2,
   MessageSquare,
   Clock,
   Building,
-  Flame,
-  Wind,
 } from "lucide-react";
 import { Property, Currency } from "@/types/property";
 import { formatCurrency } from "@/data/properties";
@@ -27,10 +23,7 @@ import { formatCurrency } from "@/data/properties";
 interface PropertyDetailModalProps {
   property: Property | null;
   currency: Currency;
-  isFavorite: boolean;
-  onToggleFavorite: (id: string) => void;
   onClose: () => void;
-  onScheduleTour: (property: Property) => void;
   onContactProperty: (property: Property) => void;
   onCalculateMortgage: (price: number) => void;
 }
@@ -38,10 +31,7 @@ interface PropertyDetailModalProps {
 export default function PropertyDetailModal({
   property,
   currency,
-  isFavorite,
-  onToggleFavorite,
   onClose,
-  onScheduleTour,
   onContactProperty,
   onCalculateMortgage,
 }: PropertyDetailModalProps) {
@@ -68,15 +58,19 @@ export default function PropertyDetailModal({
         {/* Sticky Header with Title and Close Button */}
         <div className="sticky top-0 z-20 flex items-center justify-between px-6 py-4 bg-white/95 backdrop-blur-md border-b border-slate-200">
           <div className="flex items-center gap-3 min-w-0">
-            <span
-              className={`px-3 py-1 text-xs font-bold rounded-lg uppercase tracking-wider text-white ${
-                isRental ? "bg-indigo-600" : "bg-emerald-700"
-              }`}
-            >
-              {isRental ? "For Lease" : "For Sale"}
+            <span className="px-2.5 py-1 text-xs font-bold rounded-lg uppercase tracking-wider bg-emerald-600 text-white flex items-center gap-1.5">
+              <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
+              Active MLS®
             </span>
             <span className="text-xs font-bold bg-slate-100 text-slate-800 px-2.5 py-1 rounded-lg border border-slate-200">
               {property.mlsNumber}
+            </span>
+            <span
+              className={`px-3 py-1 text-xs font-bold rounded-lg uppercase tracking-wider text-white ${
+                isRental ? "bg-indigo-600" : "bg-slate-900"
+              }`}
+            >
+              {isRental ? "For Lease" : "For Sale"}
             </span>
             <span className="text-xs font-semibold uppercase text-emerald-800 bg-emerald-50 px-2.5 py-1 rounded-lg">
               {property.specs.ownershipType}
@@ -99,17 +93,6 @@ export default function PropertyDetailModal({
                 Link copied!
               </span>
             )}
-            <button
-              onClick={() => onToggleFavorite(property.id)}
-              className={`p-2 rounded-xl transition-colors ${
-                isFavorite
-                  ? "text-rose-500 bg-rose-50"
-                  : "text-slate-600 hover:text-rose-500 hover:bg-slate-100"
-              }`}
-              title={isFavorite ? "Saved" : "Save property"}
-            >
-              <Heart className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`} />
-            </button>
             <button
               onClick={onClose}
               className="p-2 rounded-xl text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-colors"
@@ -149,7 +132,7 @@ export default function PropertyDetailModal({
                 </div>
                 <div className="bg-black/60 backdrop-blur-md px-3 py-1.5 rounded-xl text-xs text-white flex items-center gap-1.5">
                   <Clock className="w-3.5 h-3.5 text-emerald-400" />
-                  <span>Listed {property.daysOnMarket} days ago</span>
+                  <span>Currently Active on REALTOR.ca ({property.daysOnMarket}d)</span>
                 </div>
               </div>
             </div>
@@ -183,8 +166,9 @@ export default function PropertyDetailModal({
             <div className="flex items-center gap-2 text-sm font-semibold text-emerald-800">
               <MapPin className="w-4 h-4 text-emerald-700" />
               <span>
-                {property.location.address}{property.location.unitNumber ? `, ${property.location.unitNumber}` : ""}, {property.location.city},{" "}
-                {property.location.province} {property.location.postalCode}
+                {property.location.address}
+                {property.location.unitNumber ? `, ${property.location.unitNumber}` : ""},{" "}
+                {property.location.city}, {property.location.province} {property.location.postalCode}
               </span>
             </div>
             <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
@@ -257,6 +241,10 @@ export default function PropertyDetailModal({
                 <span className="font-bold text-slate-900">{property.mlsNumber}</span>
               </div>
               <div>
+                <span className="text-slate-500 block">Status:</span>
+                <span className="font-bold text-emerald-700">Currently Active</span>
+              </div>
+              <div>
                 <span className="text-slate-500 block">Building Type:</span>
                 <span className="font-bold text-slate-900">{property.specs.buildingType}</span>
               </div>
@@ -264,20 +252,20 @@ export default function PropertyDetailModal({
                 <span className="text-slate-500 block">Title / Ownership:</span>
                 <span className="font-bold text-slate-900">{property.specs.ownershipType}</span>
               </div>
-              <div>
-                <span className="text-slate-500 block">Approx. Year Built:</span>
-                <span className="font-bold text-slate-900">{property.specs.yearBuilt || "Recent"}</span>
-              </div>
               {property.specs.propertyTaxesAnnual && (
                 <div>
                   <span className="text-slate-500 block">Annual Property Taxes:</span>
-                  <span className="font-bold text-slate-900">${property.specs.propertyTaxesAnnual.toLocaleString()} / yr</span>
+                  <span className="font-bold text-slate-900">
+                    ${property.specs.propertyTaxesAnnual.toLocaleString()} / yr
+                  </span>
                 </div>
               )}
               {property.specs.maintenanceFeesMonthly && (
                 <div>
                   <span className="text-slate-500 block">Maintenance / Strata Fees:</span>
-                  <span className="font-bold text-slate-900">${property.specs.maintenanceFeesMonthly.toLocaleString()} / mo</span>
+                  <span className="font-bold text-slate-900">
+                    ${property.specs.maintenanceFeesMonthly.toLocaleString()} / mo
+                  </span>
                 </div>
               )}
               {property.specs.heatingType && (
@@ -316,7 +304,7 @@ export default function PropertyDetailModal({
                   {property.highlights.map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-700">
                       <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
-                        <Check className="w-3.5 h-3.5" />
+                        <Check className="w-3 h-3" />
                       </div>
                       <span>{item}</span>
                     </li>
@@ -367,7 +355,7 @@ export default function PropertyDetailModal({
               )}
             </div>
 
-            {/* Right Sticky Sidebar: Realtor Contact Card (NO phone/email displayed) */}
+            {/* Right Sticky Sidebar: Realtor Contact Card */}
             <div className="space-y-6">
               <div className="p-6 rounded-2xl bg-slate-900 text-white shadow-xl space-y-5">
                 <div className="flex items-center gap-3.5">
@@ -398,7 +386,7 @@ export default function PropertyDetailModal({
                 </div>
 
                 <p className="text-xs text-slate-300 leading-relaxed">
-                  Interested in this listing or looking to schedule a private walkthrough? Submit an inquiry below to connect directly with Cemar.
+                  Interested in this active listing? Send a direct message to Cemar Watin to request status certificate documents, schedule a walk-through, or submit an offer.
                 </p>
 
                 <div className="space-y-2 pt-2">
@@ -410,18 +398,7 @@ export default function PropertyDetailModal({
                     className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-sm shadow-lg transition-all"
                   >
                     <MessageSquare className="w-4 h-4" />
-                    <span>Contact Cemar About This Listing</span>
-                  </button>
-
-                  <button
-                    onClick={() => {
-                      onClose();
-                      onScheduleTour(property);
-                    }}
-                    className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-white text-xs font-semibold transition-colors"
-                  >
-                    <Calendar className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Schedule a Private Viewing</span>
+                    <span>Contact Me About This Listing</span>
                   </button>
 
                   {!isRental && (
@@ -430,10 +407,10 @@ export default function PropertyDetailModal({
                         onClose();
                         onCalculateMortgage(property.priceCad);
                       }}
-                      className="w-full flex items-center justify-center gap-2 py-2 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition-colors"
+                      className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition-colors"
                     >
                       <Calculator className="w-3.5 h-3.5 text-emerald-400" />
-                      <span>Estimate Mortgage Payment</span>
+                      <span>Estimate Canadian Mortgage</span>
                     </button>
                   )}
                 </div>

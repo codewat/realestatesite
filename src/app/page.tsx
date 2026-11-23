@@ -7,13 +7,10 @@ import StatsSection from "@/components/StatsSection";
 import PropertyCard from "@/components/PropertyCard";
 import PropertyFilter from "@/components/PropertyFilter";
 import PropertyDetailModal from "@/components/PropertyDetailModal";
-import ScheduleTourModal from "@/components/ScheduleTourModal";
-import FavoritesDrawer from "@/components/FavoritesDrawer";
 import ContactModal from "@/components/ContactModal";
 import MortgageCalculator from "@/components/MortgageCalculator";
 import NeighborhoodsSection from "@/components/NeighborhoodsSection";
 import AgentsSection from "@/components/AgentsSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import Footer from "@/components/Footer";
 import { properties } from "@/data/properties";
 import { Property, Currency, FilterState } from "@/types/property";
@@ -21,13 +18,9 @@ import { Sparkles, ArrowRight, SearchX } from "lucide-react";
 
 export default function HomePage() {
   const [currency, setCurrency] = useState<Currency>("CAD");
-  const [favorites, setFavorites] = useState<string[]>(["prop-1", "prop-3"]);
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
-  const [isTourModalOpen, setIsTourModalOpen] = useState(false);
-  const [tourTargetProperty, setTourTargetProperty] = useState<Property | null>(null);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [contactTargetProperty, setContactTargetProperty] = useState<Property | null>(null);
-  const [isFavoritesDrawerOpen, setIsFavoritesDrawerOpen] = useState(false);
   const [calculatorPrice, setCalculatorPrice] = useState<number>(1450000);
 
   const initialFilters: FilterState = {
@@ -51,17 +44,6 @@ export default function HomePage() {
     setFilters(initialFilters);
   };
 
-  const toggleFavorite = (id: string) => {
-    setFavorites((prev) =>
-      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
-    );
-  };
-
-  const handleOpenTour = (property?: Property) => {
-    setTourTargetProperty(property || null);
-    setIsTourModalOpen(true);
-  };
-
   const handleOpenContact = (property?: Property) => {
     setContactTargetProperty(property || null);
     setIsContactModalOpen(true);
@@ -82,7 +64,7 @@ export default function HomePage() {
     }
   };
 
-  // Filtered & Sorted Properties
+  // Filtered & Sorted Properties (All currently active on REALTOR.ca)
   const filteredProperties = useMemo(() => {
     return properties
       .filter((prop) => {
@@ -154,20 +136,14 @@ export default function HomePage() {
     return properties.filter((p) => p.featured);
   }, []);
 
-  const favoriteObjects = useMemo(() => {
-    return properties.filter((p) => favorites.includes(p.id));
-  }, [favorites]);
-
   return (
     <div className="min-h-screen flex flex-col bg-slate-50 selection:bg-emerald-600 selection:text-white">
-      {/* Navigation Bar with Cemar Watin, REALTOR® and HomeLife Logo */}
+      {/* Navigation Bar */}
       <Navbar
         currency={currency}
         onCurrencyToggle={() =>
           setCurrency((prev) => (prev === "CAD" ? "USD" : "CAD"))
         }
-        favoritesCount={favorites.length}
-        onOpenFavorites={() => setIsFavoritesDrawerOpen(true)}
         onOpenContact={() => handleOpenContact()}
       />
 
@@ -189,20 +165,20 @@ export default function HomePage() {
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800 mb-2">
                 <Sparkles className="w-4 h-4 text-emerald-600" />
-                <span>Featured GTA MLS® Listings</span>
+                <span>Active Toronto &amp; GTA MLS® Listings</span>
               </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                Handpicked Exclusive Residences
+                Featured Active Properties
               </h2>
               <p className="text-slate-600 text-sm sm:text-base mt-1 max-w-xl">
-                Explore premier residential, condo, and investment properties across Toronto and the GTA vetted with HomeLife Higher Standards.
+                Explore currently active residential and condominium properties in Toronto and the GTA on REALTOR.ca.
               </p>
             </div>
             <button
               onClick={scrollToProperties}
               className="mt-4 sm:mt-0 inline-flex items-center gap-2 text-sm font-bold text-emerald-800 hover:text-emerald-900 transition-colors"
             >
-              <span>View all GTA properties</span>
+              <span>View all active properties</span>
               <ArrowRight className="w-4 h-4" />
             </button>
           </div>
@@ -213,8 +189,6 @@ export default function HomePage() {
                 key={property.id}
                 property={property}
                 currency={currency}
-                isFavorite={favorites.includes(property.id)}
-                onToggleFavorite={toggleFavorite}
                 onSelectProperty={setSelectedProperty}
                 onContactProperty={handleOpenContact}
               />
@@ -226,11 +200,15 @@ export default function HomePage() {
         <section id="properties" className="py-16 bg-slate-100/70 border-t border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-10">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase mb-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+                Active on REALTOR.ca / TRREB MLS®
+              </div>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                Explore REALTOR.ca Verified Listings
+                Currently Active GTA Properties
               </h2>
               <p className="text-slate-600 text-sm sm:text-base mt-2">
-                Filter by location (Toronto, North York, Mississauga, Oakville, Markham), property type, and bedrooms.
+                Filtered by location (Toronto, North York, Mississauga, Oakville, Markham), property type, and bedrooms.
               </p>
             </div>
 
@@ -250,8 +228,6 @@ export default function HomePage() {
                     key={property.id}
                     property={property}
                     currency={currency}
-                    isFavorite={favorites.includes(property.id)}
-                    onToggleFavorite={toggleFavorite}
                     onSelectProperty={setSelectedProperty}
                     onContactProperty={handleOpenContact}
                   />
@@ -293,9 +269,6 @@ export default function HomePage() {
 
         {/* About Cemar Watin, REALTOR® */}
         <AgentsSection onOpenContact={() => handleOpenContact()} />
-
-        {/* Client Testimonials */}
-        <TestimonialsSection />
       </main>
 
       {/* Footer */}
@@ -305,22 +278,9 @@ export default function HomePage() {
       <PropertyDetailModal
         property={selectedProperty}
         currency={currency}
-        isFavorite={selectedProperty ? favorites.includes(selectedProperty.id) : false}
-        onToggleFavorite={toggleFavorite}
         onClose={() => setSelectedProperty(null)}
-        onScheduleTour={handleOpenTour}
         onContactProperty={handleOpenContact}
         onCalculateMortgage={handleCalculateMortgage}
-      />
-
-      {/* Schedule a Private Tour Modal */}
-      <ScheduleTourModal
-        property={tourTargetProperty}
-        isOpen={isTourModalOpen}
-        onClose={() => {
-          setIsTourModalOpen(false);
-          setTourTargetProperty(null);
-        }}
       />
 
       {/* Direct Contact Me Modal (Dispatches to cemarwatin@gmail.com) */}
@@ -331,17 +291,6 @@ export default function HomePage() {
           setIsContactModalOpen(false);
           setContactTargetProperty(null);
         }}
-      />
-
-      {/* Saved Properties Drawer */}
-      <FavoritesDrawer
-        isOpen={isFavoritesDrawerOpen}
-        onClose={() => setIsFavoritesDrawerOpen(false)}
-        favoriteProperties={favoriteObjects}
-        currency={currency}
-        onSelectProperty={setSelectedProperty}
-        onRemoveFavorite={toggleFavorite}
-        onClearAll={() => setFavorites([])}
       />
     </div>
   );

@@ -2,7 +2,6 @@
 
 import React, { useState } from "react";
 import {
-  Heart,
   Menu,
   X,
   Globe,
@@ -13,27 +12,21 @@ import { Currency } from "@/types/property";
 interface NavbarProps {
   currency: Currency;
   onCurrencyToggle: () => void;
-  favoritesCount: number;
-  onOpenFavorites: () => void;
   onOpenContact: () => void;
 }
 
 export default function Navbar({
   currency,
   onCurrencyToggle,
-  favoritesCount,
-  onOpenFavorites,
   onOpenContact,
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { label: "Featured", href: "#featured" },
-    { label: "MLS® Listings", href: "#properties" },
+    { label: "Active Listings", href: "#properties" },
     { label: "GTA Communities", href: "#neighborhoods" },
-    { label: "Mortgage", href: "#calculator" },
+    { label: "Mortgage Calculator", href: "#calculator" },
     { label: "About Cemar", href: "#about-realtor" },
-    { label: "Reviews", href: "#reviews" },
   ];
 
   return (
@@ -73,7 +66,7 @@ export default function Navbar({
               <a
                 key={link.label}
                 href={link.href}
-                className="px-3.5 py-2 text-sm font-semibold text-slate-600 hover:text-slate-950 hover:bg-slate-100 rounded-lg transition-all"
+                className="px-4 py-2 text-sm font-semibold text-slate-700 hover:text-slate-950 hover:bg-slate-100 rounded-lg transition-all"
               >
                 {link.label}
               </a>
@@ -95,26 +88,12 @@ export default function Navbar({
               </span>
             </button>
 
-            {/* Saved Properties */}
-            <button
-              onClick={onOpenFavorites}
-              className="relative p-2.5 rounded-xl text-slate-700 hover:text-rose-600 hover:bg-rose-50/80 transition-colors"
-              title="Saved Properties"
-            >
-              <Heart className="w-5 h-5" />
-              {favoritesCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-emerald-600 text-[11px] font-bold text-white shadow ring-2 ring-white">
-                  {favoritesCount}
-                </span>
-              )}
-            </button>
-
             {/* Contact Me CTA Button */}
             <button
               onClick={onOpenContact}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 text-white hover:bg-emerald-700 text-sm font-semibold shadow-sm hover:shadow transition-all"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-700 text-white hover:bg-emerald-800 text-sm font-bold shadow-sm hover:shadow transition-all"
             >
-              <MessageSquare className="w-4 h-4 text-emerald-400" />
+              <MessageSquare className="w-4 h-4" />
               <span>Contact Me</span>
             </button>
           </div>
@@ -128,15 +107,10 @@ export default function Navbar({
               {currency} ($)
             </button>
             <button
-              onClick={onOpenFavorites}
-              className="relative p-2 text-slate-700"
+              onClick={onOpenContact}
+              className="p-2 rounded-lg bg-emerald-50 text-emerald-700 text-xs font-bold"
             >
-              <Heart className="w-5 h-5" />
-              {favoritesCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-emerald-600 text-[10px] font-bold text-white">
-                  {favoritesCount}
-                </span>
-              )}
+              Contact
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -170,7 +144,7 @@ export default function Navbar({
                 setMobileMenuOpen(false);
                 onOpenContact();
               }}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-700 text-white font-medium hover:bg-emerald-800"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-emerald-700 text-white font-bold hover:bg-emerald-800"
             >
               <MessageSquare className="w-4 h-4" />
               Contact Cemar Watin
