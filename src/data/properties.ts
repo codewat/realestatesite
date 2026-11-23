@@ -1,0 +1,600 @@
+import { Property, Agent } from "@/types/property";
+
+export const agents: Agent[] = [
+  {
+    name: "Cemar Watin",
+    title: "REALTOR®",
+    brokerage: "HomeLife / Miracle Realty Ltd., Brokerage*",
+    recipientEmail: "cemarwatin@gmail.com",
+    avatar: "/cemar-watin.webp",
+    rating: 5.0,
+    reviewsCount: 168,
+    propertiesListed: 45,
+  },
+];
+
+export const properties: Property[] = [
+  {
+    id: "prop-1",
+    mlsNumber: "MLS® C1049281",
+    title: "Shangri-La Residences Trophy Penthouse",
+    tagline: "Panoramic Lake Ontario & CN Tower views atop 5-star Shangri-La Toronto",
+    priceCad: 3450000,
+    priceUsd: 2520000,
+    status: "for-sale",
+    type: "penthouse",
+    featured: true,
+    isNew: true,
+    daysOnMarket: 4,
+    location: {
+      address: "180 University Avenue",
+      unitNumber: "PH 6202",
+      city: "Downtown Toronto",
+      province: "Ontario",
+      postalCode: "M5H 0A2",
+      neighborhood: "Financial & Entertainment District",
+    },
+    specs: {
+      bedrooms: 3,
+      bedroomsPlus: 1,
+      bathrooms: 4,
+      areaSqft: 2850,
+      parkingSpaces: 2,
+      buildingType: "Apartment / Penthouse",
+      ownershipType: "Condominium",
+      yearBuilt: 2021,
+      propertyTaxesAnnual: 18450,
+      maintenanceFeesMonthly: 2450,
+      heatingType: "Forced Air / Gas",
+      coolingType: "Central Air",
+    },
+    amenities: [
+      "Private High-Speed Elevator Access",
+      "Valet Parking & 24/7 Doorman",
+      "Miraj Hammam Spa & Saltwater Pool",
+      "Custom Boffi Italian Designer Kitchen",
+      "Sub-Zero & Miele Built-In Suite",
+      "Automated Somfy Blackout Shades",
+      "Gas Fireplace & Balcony Gas Line",
+      "2 Underground Parking Spaces + Locker",
+    ],
+    nearby: [
+      { name: "St. Andrew Subway Station", distance: "2 mins walk", category: "Transit" },
+      { name: "Scotiabank Arena & Financial Core", distance: "6 mins walk", category: "Shopping" },
+      { name: "Princess Margaret / Mt Sinai Hospital", distance: "5 mins drive", category: "Hospital" },
+      { name: "Billy Bishop Toronto City Airport", distance: "10 mins drive", category: "Airport" },
+    ],
+    description:
+      "A trophy residence atop the iconic Shangri-La Toronto. Featuring 10-foot ceilings, herringbone hardwood floors, marble-clad ensuite baths, and floor-to-ceiling curtain wall glass capturing sunrise over the Financial District and sunset over Lake Ontario.",
+    highlights: [
+      "REALTOR.ca Verified MLS® Listing with Clean Strata Status Certificate",
+      "Full 5-star hotel concierge, fitness center, and room service privileges",
+      "Upgraded Crestron home automation with acoustic insulation",
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+    ],
+    agent: agents[0],
+  },
+  {
+    id: "prop-2",
+    mlsNumber: "MLS® C1041920",
+    title: "155 Yorkville Haute Boutique Suite",
+    tagline: "Discreet luxury living in the heart of Yorkville's Mink Mile",
+    priceCad: 1880000,
+    priceUsd: 1375000,
+    status: "for-sale",
+    type: "condo",
+    featured: true,
+    isNew: false,
+    daysOnMarket: 8,
+    location: {
+      address: "155 Yorkville Avenue",
+      unitNumber: "Suite 1804",
+      city: "Toronto",
+      province: "Ontario",
+      postalCode: "M5R 1C4",
+      neighborhood: "Yorkville",
+    },
+    specs: {
+      bedrooms: 2,
+      bedroomsPlus: 1,
+      bathrooms: 2,
+      areaSqft: 1420,
+      parkingSpaces: 1,
+      buildingType: "Apartment",
+      ownershipType: "Condominium",
+      yearBuilt: 2022,
+      propertyTaxesAnnual: 11200,
+      maintenanceFeesMonthly: 1280,
+      heatingType: "Heat Pump",
+      coolingType: "Central Air",
+    },
+    amenities: [
+      "24-Hour Boutique Concierge",
+      "Poliform Custom Walk-In Closets",
+      "Wolf Induction Cooktop & Wine Cellar",
+      "Heated Primary Ensuite Marble Floors",
+      "Deep Private Terrace with Skyline Vistas",
+      "Fitness Studio & Residents Lounge",
+    ],
+    nearby: [
+      { name: "Bloor-Yonge Subway Interchange", distance: "4 mins walk", category: "Transit" },
+      { name: "Holt Renfrew & Luxury Boutiques", distance: "2 mins walk", category: "Shopping" },
+      { name: "University of Toronto (St. George)", distance: "8 mins walk", category: "School" },
+      { name: "Royal Ontario Museum (ROM)", distance: "5 mins walk", category: "Park" },
+    ],
+    description:
+      "Experience refined Yorkville sophistication. This sun-drenched south-west corner residence offers direct access to Toronto's most prestigious restaurants, art galleries, and luxury boutiques on Bloor Street.",
+    highlights: [
+      "Low-turnover, discreet condominium building in Toronto's #1 walking neighborhood",
+      "Custom gas fireplace with integrated Italian slab marble surround",
+      "Locker and prime underground parking space included",
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?auto=format&fit=crop&w=1200&q=80",
+    ],
+    agent: agents[0],
+  },
+  {
+    id: "prop-3",
+    mlsNumber: "MLS® C1047714",
+    title: "Custom Contemporary Detached Home",
+    tagline: "Limestone modern architecture on a 50x135 ft lot with finished walk-out lower level",
+    priceCad: 2795000,
+    priceUsd: 2040000,
+    status: "for-sale",
+    type: "detached",
+    featured: true,
+    isNew: true,
+    daysOnMarket: 2,
+    location: {
+      address: "142 Churchill Avenue",
+      city: "North York",
+      province: "Ontario",
+      postalCode: "M2N 1Y9",
+      neighborhood: "Willowdale West",
+    },
+    specs: {
+      bedrooms: 4,
+      bedroomsPlus: 1,
+      bathrooms: 5,
+      areaSqft: 4100,
+      parkingSpaces: 4,
+      buildingType: "Detached 2-Storey",
+      ownershipType: "Freehold",
+      yearBuilt: 2024,
+      propertyTaxesAnnual: 14500,
+      heatingType: "Forced Air / Natural Gas",
+      coolingType: "Central Air",
+    },
+    amenities: [
+      "Double-Height 20ft Foyer",
+      "Sub-Zero & Wolf Gourmet Kitchen Suite",
+      "Finished Walkout Basement with Wet Bar",
+      "Radiant Heated Basement & Ensuite Floors",
+      "Covered Heated Rear Patio with Fireplace",
+      "Smart Security Cameras & Surround Audio",
+      "Two-Car Garage with EV Charger Rough-in",
+    ],
+    nearby: [
+      { name: "Finch Subway Station & GO Transit", distance: "12 mins walk", category: "Transit" },
+      { name: "Earl Haig Secondary School", distance: "5 mins drive", category: "School" },
+      { name: "Bayview Village Shopping Centre", distance: "8 mins drive", category: "Shopping" },
+      { name: "North York General Hospital", distance: "10 mins drive", category: "Hospital" },
+    ],
+    description:
+      "A newly built architectural masterpiece in Willowdale West. Boasting natural limestone exterior, wide-plank white oak flooring, floating glass staircase, and a chef's kitchen centered around a 12-foot quartz waterfall island.",
+    highlights: [
+      "Top-ranked school district: Churchill PS & Earl Haig SS",
+      "Complete Tarion 7-Year Home Warranty enrolled",
+      "Walk-out lower level ideal for in-law suite or home theatre",
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=1200&q=80",
+    ],
+    agent: agents[0],
+  },
+  {
+    id: "prop-4",
+    mlsNumber: "MLS® W1043329",
+    title: "Port Credit Waterfront Executive Townhouse",
+    tagline: "Steps to Port Credit marina, Lake Ontario waterfront trails, and GO Train",
+    priceCad: 1485000,
+    priceUsd: 1085000,
+    status: "for-sale",
+    type: "townhouse",
+    featured: false,
+    isNew: false,
+    daysOnMarket: 11,
+    location: {
+      address: "65 Port Street East",
+      unitNumber: "TH 12",
+      city: "Mississauga",
+      province: "Ontario",
+      postalCode: "L5G 4V3",
+      neighborhood: "Port Credit",
+    },
+    specs: {
+      bedrooms: 3,
+      bathrooms: 3,
+      areaSqft: 2250,
+      parkingSpaces: 2,
+      buildingType: "Row / Townhouse",
+      ownershipType: "Condominium",
+      yearBuilt: 2022,
+      propertyTaxesAnnual: 7800,
+      maintenanceFeesMonthly: 385,
+      heatingType: "Forced Air",
+      coolingType: "Central Air",
+    },
+    amenities: [
+      "Private Rooftop Terrace with Lake Views",
+      "Direct-Entry Double Car Garage",
+      "Custom Scavolini Italian Kitchen",
+      "Gas Fireplace in Living Room",
+      "Short Walk to Port Credit GO (25 min to Union)",
+      "Pet-Friendly Community Park",
+    ],
+    nearby: [
+      { name: "Port Credit GO Train Station", distance: "6 mins walk", category: "Transit" },
+      { name: "Snug Harbour & Lighthouse Marina", distance: "2 mins walk", category: "Park" },
+      { name: "Credit Valley Hospital", distance: "14 mins drive", category: "Hospital" },
+      { name: "Square One Shopping Centre", distance: "12 mins drive", category: "Shopping" },
+    ],
+    description:
+      "Embrace the Port Credit lifestyle in this modern 3-storey townhome. Enjoy morning strolls along Lake Ontario, gourmet cafes, and a seamless 25-minute commute to downtown Toronto via the GO Train.",
+    highlights: [
+      "Rooftop entertaining deck equipped with gas and water hookups",
+      "Spacious primary retreat with spa-like 5-piece ensuite",
+      "Low maintenance POTL fees covering landscaping and snow removal",
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+    ],
+    agent: agents[0],
+  },
+  {
+    id: "prop-5",
+    mlsNumber: "MLS® W1048802",
+    title: "Lakeshore Modern Manor in Southeast Oakville",
+    tagline: "Prestigious Eastlake address with resort-style salt pool and manicured grounds",
+    priceCad: 4650000,
+    priceUsd: 3395000,
+    status: "for-sale",
+    type: "detached",
+    featured: true,
+    isNew: false,
+    daysOnMarket: 14,
+    location: {
+      address: "1284 Lakeshore Road East",
+      city: "Oakville",
+      province: "Ontario",
+      postalCode: "L6J 1L7",
+      neighborhood: "Old Oakville / Eastlake",
+    },
+    specs: {
+      bedrooms: 5,
+      bathrooms: 6,
+      areaSqft: 5800,
+      parkingSpaces: 6,
+      buildingType: "Detached 2.5-Storey",
+      ownershipType: "Freehold",
+      yearBuilt: 2023,
+      propertyTaxesAnnual: 26000,
+      heatingType: "Forced Air / In-Floor Radiant",
+      coolingType: "Central Air",
+    },
+    amenities: [
+      "Heated Inground Saltwater Pool & Cabana",
+      "Finished Walkout Lower Level with Gym",
+      "Temperature-Controlled Wine Display",
+      "3-Car Tandem Garage with Heated Floors",
+      "Integrated Audio Throughout Home and Yard",
+      "Steps to Appleby College & Gairloch Gardens",
+    ],
+    nearby: [
+      { name: "Appleby College & St. Mildred's", distance: "4 mins drive", category: "School" },
+      { name: "Downtown Oakville Boutiques", distance: "5 mins drive", category: "Shopping" },
+      { name: "Oakville GO Station", distance: "8 mins drive", category: "Transit" },
+      { name: "Toronto Pearson Airport (YYZ)", distance: "28 mins drive", category: "Airport" },
+    ],
+    description:
+      "Set in Oakville's most esteemed enclave, this estate offers timeless craftsmanship. Featuring soaring coffered ceilings, bespoke millwork, and private landscaped grounds offering ultimate seclusion.",
+    highlights: [
+      "Ranked #1 municipality to live in Canada with top tier private schools",
+      "Custom outdoor kitchen with Lynx grill and wood burning pizza oven",
+      "Full automated irrigation and backup whole-home generator",
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1613977257363-707ba9348227?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=1200&q=80",
+    ],
+    agent: agents[0],
+  },
+  {
+    id: "prop-6",
+    mlsNumber: "MLS® N1042095",
+    title: "Unionville Modern Luxury Residence",
+    tagline: "Stunning family home backing onto ravine near Historic Main Street Unionville",
+    priceCad: 2150000,
+    priceUsd: 1570000,
+    status: "for-sale",
+    type: "detached",
+    featured: false,
+    isNew: false,
+    daysOnMarket: 6,
+    location: {
+      address: "88 Fred Varley Drive",
+      city: "Markham",
+      province: "Ontario",
+      postalCode: "L3R 1S8",
+      neighborhood: "Unionville",
+    },
+    specs: {
+      bedrooms: 4,
+      bathrooms: 4,
+      areaSqft: 3200,
+      parkingSpaces: 4,
+      buildingType: "Detached 2-Storey",
+      ownershipType: "Freehold",
+      yearBuilt: 2021,
+      propertyTaxesAnnual: 9800,
+      heatingType: "Forced Air",
+      coolingType: "Central Air",
+    },
+    amenities: [
+      "Backs Onto Mature Protected Ravine",
+      "Renovated Chef's Kitchen with Quartz",
+      "Hardwood Flooring Throughout Both Levels",
+      "Main Floor Executive Office / Library",
+      "Finished Basement with Extra In-law Suite",
+      "Minutes to Too Good Pond & Unionville Main",
+    ],
+    nearby: [
+      { name: "Unionville High School (Top Ranking)", distance: "3 mins drive", category: "School" },
+      { name: "Historic Main Street Unionville", distance: "8 mins walk", category: "Shopping" },
+      { name: "Unionville GO Station", distance: "5 mins drive", category: "Transit" },
+      { name: "Markham Stouffville Hospital", distance: "12 mins drive", category: "Hospital" },
+    ],
+    description:
+      "An idyllic family residence situated on a quiet tree-lined street in prestigious Unionville. Enjoy morning coffee overlooking the lush ravine canopy and easy access to Markham's thriving tech hub.",
+    highlights: [
+      "Top ranked Unionville High School school zone",
+      "Spacious bedrooms each with direct bathroom access",
+      "Deep 140ft private lot with interlock stone patio",
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600573472591-ee6c563aaec9?auto=format&fit=crop&w=1200&q=80",
+    ],
+    agent: agents[0],
+  },
+  {
+    id: "prop-7",
+    mlsNumber: "MLS® C1049920",
+    title: "Harbourfront Panoramic Lakefront Loft (For Lease)",
+    tagline: "Fully furnished executive rental overlooking Lake Ontario and Toronto Island",
+    priceCad: 3800,
+    priceUsd: 2780,
+    status: "for-rent",
+    type: "condo",
+    featured: true,
+    isNew: true,
+    daysOnMarket: 3,
+    location: {
+      address: "218 Queens Quay West",
+      unitNumber: "Suite 1406",
+      city: "Downtown Toronto",
+      province: "Ontario",
+      postalCode: "M5J 2Y6",
+      neighborhood: "Harbourfront / Waterfront",
+    },
+    specs: {
+      bedrooms: 2,
+      bathrooms: 2,
+      areaSqft: 980,
+      parkingSpaces: 1,
+      buildingType: "Apartment",
+      ownershipType: "Condominium",
+      yearBuilt: 2023,
+      heatingType: "Heat Pump",
+      coolingType: "Central Air",
+    },
+    amenities: [
+      "Direct Lake Ontario Horizon Views",
+      "Fully Furnished with Modern EQ3 Decor",
+      "High-speed 1Gbps Fiber Internet Included",
+      "Rooftop Infinity Pool & Sun Lounge",
+      "TTC Streetcar at Doorstep to Union Station",
+      "Building Gym & 24hr Security",
+    ],
+    nearby: [
+      { name: "Union Station (UP Express & GO)", distance: "8 mins walk", category: "Transit" },
+      { name: "Toronto Island Ferry Docks", distance: "4 mins walk", category: "Park" },
+      { name: "Financial District", distance: "10 mins walk", category: "Shopping" },
+    ],
+    description:
+      "Available for prestigious executive lease. Watch the sailboats cruise Lake Ontario from your private balcony. Fully furnished with high-end designer pieces, smart home tech, and all utilities included.",
+    highlights: [
+      "Includes hydro, high-speed fiber internet, and parking",
+      "Walkable to Bay Street and Financial District in 10 minutes",
+      "Available for 6-month or 1-year corporate lease",
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80",
+    ],
+    agent: agents[0],
+  },
+  {
+    id: "prop-8",
+    mlsNumber: "MLS® C1045199",
+    title: "High Park Garden Luxury Townhome (For Lease)",
+    tagline: "3-storey modern home with private backyard steps to High Park and subway",
+    priceCad: 4400,
+    priceUsd: 3200,
+    status: "for-rent",
+    type: "townhouse",
+    featured: false,
+    isNew: false,
+    daysOnMarket: 5,
+    location: {
+      address: "18 High Park Avenue",
+      city: "Toronto",
+      province: "Ontario",
+      postalCode: "M6P 2S3",
+      neighborhood: "High Park North / Bloor West",
+    },
+    specs: {
+      bedrooms: 3,
+      bathrooms: 3,
+      areaSqft: 1850,
+      parkingSpaces: 1,
+      buildingType: "Row / Townhouse",
+      ownershipType: "Freehold",
+      yearBuilt: 2022,
+      heatingType: "Forced Air",
+      coolingType: "Central Air",
+    },
+    amenities: [
+      "Private Fenced Garden Backyard",
+      "Walk to High Park (400-acre park & zoo)",
+      "2-Minute Walk to High Park Subway",
+      "Primary Bedroom with Rooftop Balcony",
+      "Gas Range & Stone Countertops",
+      "Pet-Friendly Family Neighborhood",
+    ],
+    nearby: [
+      { name: "High Park Subway Station", distance: "2 mins walk", category: "Transit" },
+      { name: "Bloor West Village Shops & Cafes", distance: "5 mins walk", category: "Shopping" },
+      { name: "St. Joseph's Health Centre", distance: "6 mins drive", category: "Hospital" },
+    ],
+    description:
+      "Live next to Toronto's largest urban green sanctuary. This elegant townhome offers family living with urban convenience. Close to top French immersion schools, boutique organic grocers, and subway transit.",
+    highlights: [
+      "Single-car private garage with storage space",
+      "Finished basement suitable for rec room or home office",
+      "Steps to Bloor West Village community atmosphere",
+    ],
+    images: [
+      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=1200&q=80",
+      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80",
+    ],
+    agent: agents[0],
+  },
+];
+
+export const neighborhoodGuides = [
+  {
+    name: "Downtown Toronto & Yorkville",
+    city: "Toronto, ON",
+    tagline: "Financial core, world-class dining, luxury retail & cultural landmarks",
+    image: "https://images.unsplash.com/photo-1517090504586-fde19ea6066f?auto=format&fit=crop&w=800&q=80",
+    propertyCount: "85 MLS® Listings",
+    avgPrice: "$1.45M",
+    lifestyle: ["Cosmopolitan", "Transit-Oriented", "Walkable", "Luxury High-Rise"],
+  },
+  {
+    name: "Mississauga & Port Credit",
+    city: "Mississauga, ON",
+    tagline: "Waterfront harbor, vibrant Square One core & excellent family communities",
+    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=800&q=80",
+    propertyCount: "62 MLS® Listings",
+    avgPrice: "$1.12M",
+    lifestyle: ["Lakefront Parks", "Marina Dining", "GO Commuter", "Family Friendly"],
+  },
+  {
+    name: "Oakville & Burlington",
+    city: "Oakville, ON",
+    tagline: "Premier lakefront estates, top-ranked private schools & historic downtown",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80",
+    propertyCount: "44 MLS® Listings",
+    avgPrice: "$1.95M",
+    lifestyle: ["Prestige Estates", "Top Schools", "Lakeshore Walkways", "Peaceful"],
+  },
+  {
+    name: "North York & Markham",
+    city: "North York / Markham, ON",
+    tagline: "Fast-growing tech corridor, top academic secondary schools & modern homes",
+    image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80",
+    propertyCount: "58 MLS® Listings",
+    avgPrice: "$1.38M",
+    lifestyle: ["Academic Hub", "Tech Corridor", "Spacious Lots", "Multicultural"],
+  },
+];
+
+export const clientTestimonials = [
+  {
+    id: "test-1",
+    client: "Dr. Jonathan & Sarah Chen",
+    role: "Purchased Custom Detached Home in Willowdale, North York",
+    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80",
+    rating: 5,
+    text: "Cemar Watin represented us with exceptional skill in the competitive North York market. He negotiated $80,000 under asking and guided us through the inspection and closing. His knowledge of GTA neighbourhoods and HomeLife Higher Standards is unmatched.",
+  },
+  {
+    id: "test-2",
+    client: "Michael Rodriguez",
+    role: "Sold Downtown Toronto Condo & Upgraded to Port Credit",
+    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80",
+    rating: 5,
+    text: "Cemar sold our King West condo in just 6 days above asking price and helped us secure our dream waterfront townhome in Port Credit. Professional, honest, and prompt in answering every inquiry. Best REALTOR® in the GTA!",
+  },
+  {
+    id: "test-3",
+    client: "Anita & Jaswinder Gill",
+    role: "Purchased Family Home in Markham / Unionville",
+    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=200&q=80",
+    rating: 5,
+    text: "As first-time detached homebuyers navigating the Toronto market, Cemar gave us clarity, patience, and confidence. His mortgage recommendations and market comps protected our investment. We couldn't be happier with our new home.",
+  },
+];
+
+export function formatCurrency(amount: number, currency: 'CAD' | 'USD' = 'CAD', isRental = false): string {
+  let formatted = "";
+  if (currency === 'CAD') {
+    formatted = `$${amount.toLocaleString('en-CA')} CAD`;
+  } else {
+    formatted = `$${amount.toLocaleString('en-US')} USD`;
+  }
+  return isRental ? `${formatted}/mo` : formatted;
+}
+
+export function calculateMortgage(
+  price: number,
+  downPaymentPercent: number,
+  annualInterestRate: number,
+  loanTermYears: number = 25
+) {
+  const downPayment = price * (downPaymentPercent / 100);
+  const principal = price - downPayment;
+  const monthlyRate = annualInterestRate / 100 / 12;
+  const totalMonths = loanTermYears * 12;
+
+  let monthlyPayment = 0;
+  if (monthlyRate === 0) {
+    monthlyPayment = principal / totalMonths;
+  } else {
+    monthlyPayment =
+      (principal * (monthlyRate * Math.pow(1 + monthlyRate, totalMonths))) /
+      (Math.pow(1 + monthlyRate, totalMonths) - 1);
+  }
+
+  const totalPayment = monthlyPayment * totalMonths;
+  const totalInterest = totalPayment - principal;
+
+  return {
+    downPayment,
+    principal,
+    monthlyPayment: Math.round(monthlyPayment),
+    totalPayment: Math.round(totalPayment),
+    totalInterest: Math.round(totalInterest),
+  };
+}
