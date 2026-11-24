@@ -17,21 +17,16 @@ interface NavbarProps {
   currency: Currency;
   onCurrencyToggle: () => void;
   onOpenContact: () => void;
+  onOpenCalculator: () => void;
 }
 
 export default function Navbar({
   currency,
   onCurrencyToggle,
   onOpenContact,
+  onOpenCalculator,
 }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-
-  const navLinks = [
-    { label: "Active Listings", href: "#properties", icon: Home },
-    { label: "GTA Communities", href: "#neighborhoods", icon: MapPin },
-    { label: "Mortgage Calculator", href: "#calculator", icon: Calculator },
-    { label: "About Cemar", href: "#about-realtor", icon: User },
-  ];
 
   return (
     <header className="fixed top-3 sm:top-5 inset-x-0 z-50 w-full px-3 sm:px-6 pointer-events-none transition-all">
@@ -69,19 +64,30 @@ export default function Navbar({
 
         {/* Center: Floating Navigation Buttons Dock with Shadow */}
         <nav className="hidden lg:flex items-center gap-1.5 p-1.5 rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 shadow-[0_12px_30px_-5px_rgba(0,0,0,0.35),0_4px_10px_-2px_rgba(0,0,0,0.2)]">
-          {navLinks.map((link) => {
-            const Icon = link.icon;
-            return (
-              <a
-                key={link.label}
-                href={link.href}
-                className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-slate-700 hover:text-emerald-800 rounded-full bg-slate-50/90 hover:bg-white border border-slate-200/70 hover:border-emerald-600/30 shadow-sm hover:shadow transition-all transform hover:-translate-y-0.5 whitespace-nowrap"
-              >
-                <Icon className="w-3.5 h-3.5 text-emerald-700" />
-                <span>{link.label}</span>
-              </a>
-            );
-          })}
+          <a
+            href="#properties"
+            className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-slate-700 hover:text-emerald-800 rounded-full bg-slate-50/90 hover:bg-white border border-slate-200/70 hover:border-emerald-600/30 shadow-sm hover:shadow transition-all transform hover:-translate-y-0.5 whitespace-nowrap"
+          >
+            <Home className="w-3.5 h-3.5 text-emerald-700" />
+            <span>Active MLS® Listings</span>
+          </a>
+
+          <button
+            type="button"
+            onClick={onOpenCalculator}
+            className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-slate-700 hover:text-emerald-800 rounded-full bg-slate-50/90 hover:bg-white border border-slate-200/70 hover:border-emerald-600/30 shadow-sm hover:shadow transition-all transform hover:-translate-y-0.5 whitespace-nowrap cursor-pointer"
+          >
+            <Calculator className="w-3.5 h-3.5 text-emerald-700" />
+            <span>Mortgage Calculator</span>
+          </button>
+
+          <a
+            href="#"
+            className="flex items-center gap-1.5 px-4 py-2 text-xs font-bold text-slate-700 hover:text-emerald-800 rounded-full bg-slate-50/90 hover:bg-white border border-slate-200/70 hover:border-emerald-600/30 shadow-sm hover:shadow transition-all transform hover:-translate-y-0.5 whitespace-nowrap"
+          >
+            <User className="w-3.5 h-3.5 text-emerald-700" />
+            <span>About Cemar</span>
+          </a>
         </nav>
 
         {/* Right: Floating Currency & Contact Buttons */}
@@ -123,20 +129,33 @@ export default function Navbar({
       {mobileMenuOpen && (
         <div className="lg:hidden pointer-events-auto max-w-sm mx-auto mt-2 rounded-3xl bg-white/95 backdrop-blur-xl border border-slate-200/90 p-4 space-y-2 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.2)] animate-fade-in">
           <nav className="flex flex-col space-y-1.5">
-            {navLinks.map((link) => {
-              const Icon = link.icon;
-              return (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl text-sm font-bold text-slate-700 bg-slate-50 hover:bg-emerald-50 hover:text-emerald-800 shadow-sm transition-all"
-                >
-                  <Icon className="w-4 h-4 text-emerald-700" />
-                  <span>{link.label}</span>
-                </a>
-              );
-            })}
+            <a
+              href="#properties"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl text-sm font-bold text-slate-700 bg-slate-50 hover:bg-emerald-50 hover:text-emerald-800 shadow-sm transition-all"
+            >
+              <Home className="w-4 h-4 text-emerald-700" />
+              <span>Active MLS® Listings</span>
+            </a>
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                onOpenCalculator();
+              }}
+              className="w-full flex items-center gap-2.5 px-4 py-2.5 rounded-2xl text-sm font-bold text-slate-700 bg-slate-50 hover:bg-emerald-50 hover:text-emerald-800 shadow-sm transition-all text-left"
+            >
+              <Calculator className="w-4 h-4 text-emerald-700" />
+              <span>Mortgage Calculator</span>
+            </button>
+            <a
+              href="#"
+              onClick={() => setMobileMenuOpen(false)}
+              className="flex items-center gap-2.5 px-4 py-2.5 rounded-2xl text-sm font-bold text-slate-700 bg-slate-50 hover:bg-emerald-50 hover:text-emerald-800 shadow-sm transition-all"
+            >
+              <User className="w-4 h-4 text-emerald-700" />
+              <span>About Cemar Watin</span>
+            </a>
           </nav>
           <div className="pt-2">
             <button

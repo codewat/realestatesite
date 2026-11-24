@@ -8,18 +8,17 @@ import PropertyCard from "@/components/PropertyCard";
 import PropertyFilter from "@/components/PropertyFilter";
 import PropertyDetailModal from "@/components/PropertyDetailModal";
 import ContactModal from "@/components/ContactModal";
-import MortgageCalculator from "@/components/MortgageCalculator";
-import NeighborhoodsSection from "@/components/NeighborhoodsSection";
-import AgentsSection from "@/components/AgentsSection";
+import MortgageCalculatorModal from "@/components/MortgageCalculatorModal";
 import Footer from "@/components/Footer";
 import { properties } from "@/data/properties";
 import { Property, Currency, FilterState } from "@/types/property";
-import { Sparkles, ArrowRight, SearchX } from "lucide-react";
+import { SearchX } from "lucide-react";
 
 export default function HomePage() {
   const [currency, setCurrency] = useState<Currency>("CAD");
   const [selectedProperty, setSelectedProperty] = useState<Property | null>(null);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
+  const [isCalculatorModalOpen, setIsCalculatorModalOpen] = useState(false);
   const [contactTargetProperty, setContactTargetProperty] = useState<Property | null>(null);
   const [calculatorPrice, setCalculatorPrice] = useState<number>(1450000);
 
@@ -51,10 +50,7 @@ export default function HomePage() {
 
   const handleCalculateMortgage = (price: number) => {
     setCalculatorPrice(price);
-    const element = document.getElementById("calculator");
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    setIsCalculatorModalOpen(true);
   };
 
   const scrollToProperties = () => {
@@ -132,10 +128,6 @@ export default function HomePage() {
       });
   }, [filters]);
 
-  const featuredProperties = useMemo(() => {
-    return properties.filter((p) => p.featured);
-  }, []);
-
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 selection:bg-emerald-600 selection:text-white">
       {/* Floating Navigation Bar */}
@@ -145,6 +137,7 @@ export default function HomePage() {
           setCurrency((prev) => (prev === "CAD" ? "USD" : "CAD"))
         }
         onOpenContact={() => handleOpenContact()}
+        onOpenCalculator={() => setIsCalculatorModalOpen(true)}
       />
 
       <main className="flex-1">
@@ -154,52 +147,14 @@ export default function HomePage() {
           onUpdateFilters={updateFilters}
           onSearchSubmit={scrollToProperties}
           onOpenContact={() => handleOpenContact()}
+          onOpenCalculator={() => setIsCalculatorModalOpen(true)}
         />
 
         {/* Real Estate Sales & Trust Stats */}
         <StatsSection />
 
-        {/* Featured Showcase Highlight Section */}
-        <section id="featured" className="py-16 sm:py-20 bg-slate-50 border-t border-slate-200">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
-            <div>
-              <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800 mb-2">
-                <Sparkles className="w-4 h-4 text-emerald-600" />
-                <span>Active Toronto &amp; GTA MLS® Listings</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
-                Featured Active Properties
-              </h2>
-              <p className="text-slate-600 text-sm sm:text-base mt-1 max-w-xl">
-                Explore currently active residential and condominium properties in Toronto and the GTA on REALTOR.ca.
-              </p>
-            </div>
-            <button
-              onClick={scrollToProperties}
-              className="mt-4 sm:mt-0 inline-flex items-center gap-2 text-sm font-bold text-emerald-800 hover:text-emerald-900 transition-colors"
-            >
-              <span>View all active properties</span>
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProperties.slice(0, 3).map((property) => (
-              <PropertyCard
-                key={property.id}
-                property={property}
-                currency={currency}
-                onSelectProperty={setSelectedProperty}
-                onContactProperty={handleOpenContact}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-        {/* Main Property Listings Grid with Advanced Filters */}
-        <section id="properties" className="py-16 bg-slate-100/70 border-t border-slate-200">
+        {/* Main Property Listings Grid with Advanced Filters & Community Chips */}
+        <section id="properties" className="py-16 bg-slate-100/80 border-t border-slate-200">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-2xl mx-auto mb-10">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase mb-2">
@@ -210,11 +165,11 @@ export default function HomePage() {
                 Currently Active GTA Properties
               </h2>
               <p className="text-slate-600 text-sm sm:text-base mt-2">
-                Filtered by location (Toronto, North York, Mississauga, Oakville, Markham), property type, and bedrooms.
+                Browse verified residential homes, condominiums, and luxury properties in Toronto, North York, Mississauga, Oakville, and Markham.
               </p>
             </div>
 
-            {/* Filter Bar Component */}
+            {/* Filter Bar Component with Category & Community Location Chips */}
             <PropertyFilter
               filters={filters}
               onUpdateFilters={updateFilters}
@@ -257,20 +212,6 @@ export default function HomePage() {
             )}
           </div>
         </section>
-
-        {/* Neighborhood Guides */}
-        <NeighborhoodsSection
-          onSelectCityFilter={(city) => {
-            updateFilters({ city });
-            scrollToProperties();
-          }}
-        />
-
-        {/* Interactive Canadian Mortgage Calculator */}
-        <MortgageCalculator initialPrice={calculatorPrice} />
-
-        {/* About Cemar Watin, REALTOR® */}
-        <AgentsSection onOpenContact={() => handleOpenContact()} />
       </main>
 
       {/* Footer */}
@@ -293,6 +234,14 @@ export default function HomePage() {
           setIsContactModalOpen(false);
           setContactTargetProperty(null);
         }}
+      />
+
+      {/* Interactive Canadian Mortgage Calculator Modal */}
+      <MortgageCalculatorModal
+        isOpen={isCalculatorModalOpen}
+        onClose={() => setIsCalculatorModalOpen(false)}
+        initialPrice={calculatorPrice}
+        onOpenContact={() => handleOpenContact()}
       />
     </div>
   );

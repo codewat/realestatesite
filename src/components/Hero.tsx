@@ -11,6 +11,7 @@ import {
   Sparkles,
   MessageSquare,
   CheckCircle,
+  Calculator,
 } from "lucide-react";
 import { FilterState, PropertyType, ListingStatus } from "@/types/property";
 
@@ -19,6 +20,7 @@ interface HeroProps {
   onUpdateFilters: (updates: Partial<FilterState>) => void;
   onSearchSubmit: () => void;
   onOpenContact: () => void;
+  onOpenCalculator: () => void;
 }
 
 export default function Hero({
@@ -26,6 +28,7 @@ export default function Hero({
   onUpdateFilters,
   onSearchSubmit,
   onOpenContact,
+  onOpenCalculator,
 }: HeroProps) {
   const [localSearch, setLocalSearch] = useState(filters.searchQuery);
 
@@ -84,12 +87,14 @@ export default function Hero({
                 <MessageSquare className="w-4 h-4" />
                 <span>Contact Me</span>
               </button>
-              <a
-                href="#calculator"
-                className="flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition-colors"
+              <button
+                type="button"
+                onClick={onOpenCalculator}
+                className="flex items-center gap-2 px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition-colors cursor-pointer"
               >
+                <Calculator className="w-4 h-4 text-emerald-400" />
                 <span>Canadian Mortgage Calculator</span>
-              </a>
+              </button>
             </div>
           </div>
 

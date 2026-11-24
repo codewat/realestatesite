@@ -6,6 +6,7 @@ import {
   SlidersHorizontal,
   X,
   Check,
+  MapPin,
 } from "lucide-react";
 import { FilterState, PropertyType } from "@/types/property";
 
@@ -29,6 +30,15 @@ export default function PropertyFilter({
     { label: "Penthouses", type: "penthouse" },
     { label: "Townhouses", type: "townhouse" },
     { label: "Semi-Detached", type: "semi-detached" },
+  ];
+
+  const cityPills = [
+    { label: "All GTA", value: "all" },
+    { label: "Toronto", value: "Toronto" },
+    { label: "North York", value: "North York" },
+    { label: "Mississauga", value: "Mississauga" },
+    { label: "Oakville", value: "Oakville" },
+    { label: "Markham", value: "Markham" },
   ];
 
   const hasActiveFilters =
@@ -60,6 +70,31 @@ export default function PropertyFilter({
               }`}
             >
               {pill.label}
+            </button>
+          );
+        })}
+      </div>
+
+      {/* City / Location Quick Chips */}
+      <div className="flex items-center gap-1.5 overflow-x-auto py-2.5 scrollbar-none border-b border-slate-100 text-xs">
+        <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1 shrink-0 mr-1">
+          <MapPin className="w-3 h-3 text-emerald-600" />
+          Location:
+        </span>
+        {cityPills.map((city) => {
+          const isActive = filters.city === city.value;
+          return (
+            <button
+              key={city.label}
+              type="button"
+              onClick={() => onUpdateFilters({ city: city.value })}
+              className={`px-3 py-1.5 rounded-lg text-xs font-semibold whitespace-nowrap transition-all duration-150 cursor-pointer ${
+                isActive
+                  ? "bg-emerald-700 text-white shadow-sm"
+                  : "bg-slate-50 text-slate-600 hover:bg-slate-100 hover:text-slate-900 border border-slate-200/60"
+              }`}
+            >
+              {city.label}
             </button>
           );
         })}
