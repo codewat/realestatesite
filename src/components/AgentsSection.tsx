@@ -26,7 +26,7 @@ export default function AgentsSection({ onOpenContact }: AgentsSectionProps) {
                   </div>
                   <div className="flex items-center gap-1 text-amber-300 text-xs font-bold">
                     <Star className="w-3.5 h-3.5 fill-current" />
-                    <span>5.0 (168 reviews)</span>
+                    <span>Top-Rated REALTOR®</span>
                   </div>
                 </div>
               </div>

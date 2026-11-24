@@ -137,8 +137,8 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col bg-slate-50 selection:bg-emerald-600 selection:text-white">
-      {/* Navigation Bar */}
+    <div className="min-h-screen flex flex-col bg-slate-950 selection:bg-emerald-600 selection:text-white">
+      {/* Floating Navigation Bar */}
       <Navbar
         currency={currency}
         onCurrencyToggle={() =>
@@ -160,8 +160,9 @@ export default function HomePage() {
         <StatsSection />
 
         {/* Featured Showcase Highlight Section */}
-        <section id="featured" className="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
+        <section id="featured" className="py-16 sm:py-20 bg-slate-50 border-t border-slate-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10">
             <div>
               <div className="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-emerald-800 mb-2">
                 <Sparkles className="w-4 h-4 text-emerald-600" />
@@ -194,7 +195,8 @@ export default function HomePage() {
               />
             ))}
           </div>
-        </section>
+        </div>
+      </section>
 
         {/* Main Property Listings Grid with Advanced Filters */}
         <section id="properties" className="py-16 bg-slate-100/70 border-t border-slate-200">
