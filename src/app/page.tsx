@@ -9,6 +9,7 @@ import PropertyFilter from "@/components/PropertyFilter";
 import PropertyDetailModal from "@/components/PropertyDetailModal";
 import ContactModal from "@/components/ContactModal";
 import MortgageCalculatorModal from "@/components/MortgageCalculatorModal";
+import MainFeaturedBanner from "@/components/MainFeaturedBanner";
 import Footer from "@/components/Footer";
 import { properties } from "@/data/properties";
 import { Property, Currency, FilterState } from "@/types/property";
@@ -107,6 +108,10 @@ export default function HomePage() {
         return true;
       })
       .sort((a, b) => {
+        // Cemar's own listing is always pinned first
+        if (a.isCemarListing && !b.isCemarListing) return -1;
+        if (!a.isCemarListing && b.isCemarListing) return 1;
+
         if (filters.sortBy === "featured") {
           if (a.featured && !b.featured) return -1;
           if (!a.featured && b.featured) return 1;
@@ -127,6 +132,10 @@ export default function HomePage() {
         return 0;
       });
   }, [filters]);
+
+  const mainFeaturedProperty = useMemo(() => {
+    return properties.find((p) => p.isCemarListing) || properties[0];
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col bg-slate-950 selection:bg-emerald-600 selection:text-white">
@@ -152,6 +161,16 @@ export default function HomePage() {
 
         {/* Real Estate Sales & Trust Stats */}
         <StatsSection />
+
+        {/* Cemar Watin's Own Active Listing Main Feature Showcase */}
+        {mainFeaturedProperty && (
+          <MainFeaturedBanner
+            property={mainFeaturedProperty}
+            currency={currency}
+            onSelectProperty={setSelectedProperty}
+            onContactProperty={handleOpenContact}
+          />
+        )}
 
         {/* Main Property Listings Grid with Advanced Filters & Community Chips */}
         <section id="properties" className="py-16 bg-slate-100/80 border-t border-slate-200">

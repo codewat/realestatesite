@@ -12,6 +12,7 @@ import {
   Sparkles,
   Clock,
   Building,
+  ExternalLink,
 } from "lucide-react";
 import { Property, Currency } from "@/types/property";
 import { formatCurrency } from "@/data/properties";
@@ -34,7 +35,13 @@ export default function PropertyCard({
   const formattedPrice = formatCurrency(price, currency, isRental);
 
   return (
-    <div className="group relative bg-white rounded-2xl overflow-hidden border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col">
+    <div
+      className={`group relative bg-white rounded-2xl overflow-hidden border transition-all duration-300 flex flex-col ${
+        property.isCemarListing
+          ? "border-emerald-500/80 shadow-md shadow-emerald-950/10 ring-2 ring-emerald-500/40"
+          : "border-slate-200/90 shadow-sm hover:shadow-xl"
+      }`}
+    >
       {/* Image Container with Badges */}
       <div
         className="relative aspect-[16/10] overflow-hidden bg-slate-100 cursor-pointer"
@@ -51,6 +58,13 @@ export default function PropertyCard({
 
         {/* Top Badges */}
         <div className="absolute top-3 left-3 flex flex-wrap gap-1.5 z-10">
+          {property.isCemarListing && (
+            <span className="px-2.5 py-1 text-[11px] font-black rounded-lg uppercase tracking-wider bg-gradient-to-r from-amber-500 via-emerald-600 to-teal-700 text-white shadow-md flex items-center gap-1.5 ring-1 ring-white/40">
+              <Sparkles className="w-3.5 h-3.5 text-amber-200 fill-amber-200" />
+              <span>Cemar&apos;s Exclusive Listing</span>
+            </span>
+          )}
+
           {/* Active Status Badge */}
           <span className="px-2.5 py-1 text-[11px] font-bold rounded-lg uppercase tracking-wider bg-emerald-600 text-white shadow-sm flex items-center gap-1.5">
             <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
@@ -192,11 +206,24 @@ export default function PropertyCard({
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {property.realtorCaUrl && (
+              <a
+                href={property.realtorCaUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="px-2.5 py-1.5 rounded-xl text-xs font-bold text-red-700 bg-red-50 hover:bg-red-100 border border-red-200 transition-colors flex items-center gap-1"
+                title="View on REALTOR.ca®"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span className="hidden sm:inline">REALTOR.ca®</span>
+              </a>
+            )}
             <button
               type="button"
               onClick={() => onContactProperty(property)}
-              className="px-3.5 py-1.5 rounded-xl text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 transition-colors flex items-center gap-1.5"
+              className="px-3 py-1.5 rounded-xl text-xs font-bold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 transition-colors flex items-center gap-1"
               title="Contact Cemar about this listing"
             >
               <MessageSquare className="w-3.5 h-3.5" />

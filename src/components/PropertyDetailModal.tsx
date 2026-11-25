@@ -16,6 +16,7 @@ import {
   MessageSquare,
   Clock,
   Building,
+  ExternalLink,
 } from "lucide-react";
 import { Property, Currency } from "@/types/property";
 import { formatCurrency } from "@/data/properties";
@@ -400,6 +401,18 @@ export default function PropertyDetailModal({
                     <MessageSquare className="w-4 h-4" />
                     <span>Contact Me About This Listing</span>
                   </button>
+
+                  {property.realtorCaUrl && (
+                    <a
+                      href={property.realtorCaUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all group"
+                    >
+                      <ExternalLink className="w-4 h-4 group-hover:scale-110 transition-transform" />
+                      <span>View Official Listing on REALTOR.ca®</span>
+                    </a>
+                  )}
 
                   {!isRental && (
                     <button

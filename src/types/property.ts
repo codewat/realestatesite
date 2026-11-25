@@ -58,6 +58,8 @@ export interface Property {
   highlights: string[];
   images: string[];
   agent: Agent;
+  realtorCaUrl?: string;
+  isCemarListing?: boolean;
 }
 
 export type Currency = 'CAD' | 'USD';
